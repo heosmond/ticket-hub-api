@@ -18,7 +18,12 @@ namespace ticket_hub_api.Controllers
             _configuration = configuration;
         }
 
-        // TODO In portal.azure.com, go to the Web App, then go to Settings -> Environment Variables. Click the "+" to add a new "App Setting"
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("Received get request");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Purchase purchase)
         {

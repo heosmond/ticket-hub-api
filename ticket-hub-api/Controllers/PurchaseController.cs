@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Queues;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.Marshalling;
+using System.Text;
 using System.Text.Json;
 
 namespace ticket_hub_api.Controllers
@@ -46,8 +47,10 @@ namespace ticket_hub_api.Controllers
             // serialize an object to json
             string message = JsonSerializer.Serialize(purchase);
 
-            // send string message to queue
-            await queueClient.SendMessageAsync(message);
+            // send string message to queue (must encode as base64 to work properly)
+            var plainTextBytes = Encoding.UTF8.GetBytes(message);
+            var base64Message = Convert.ToBase64String(plainTextBytes);
+            await queueClient.SendMessageAsync(base64Message);
 
 
             return Ok("Thank you, " + purchase.Name + ". Your purchase is being processed");

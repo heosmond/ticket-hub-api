@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
-            policy.WithOrigins("https://nscc-0493304-tickethub-api-d4b0c7c0fzdze9a2.canadacentral-01.azurewebsites.net")
+            policy.WithOrigins("https://gray-plant-004549a0f.6.azurestaticapps.net/")
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
